@@ -18,7 +18,7 @@ test.afterAll(async () => {
 });
 
 test.describe("GIVEN: an empty Todo list", () => {
-  test(`When: user adds a Todo for '${todoText}'`, async () => {
+  test(`WHEN: user adds a Todo for '${todoText}'`, async () => {
     const addTodoLink = page.getByTestId("add-todo-link");
     await expect(addTodoLink).toHaveAttribute("href", "/addtodo");
     await addTodoLink.click();
@@ -30,7 +30,7 @@ test.describe("GIVEN: an empty Todo list", () => {
     await expect(page.url()).toMatch(site);
   });
 
-  test("Then that item is listed", async () => {
+  test("THEN: that item is listed", async () => {
     await expect(page.getByTestId("todo-title").first()).toHaveText(todoText);
   });
 });
@@ -38,7 +38,7 @@ test.describe("GIVEN: an empty Todo list", () => {
 test.describe(`GIVEN: a Todo list with item '${todoText}'`, () => {
   let todos;
 
-  test(`When: user clicks trash button for item '${todoText}'`, async () => {
+  test(`WHEN: user clicks trash button for item '${todoText}'`, async () => {
     todos = page.getByTestId("todo-title").allTextContents();
     console.log("todos", todos);
 
@@ -48,7 +48,7 @@ test.describe(`GIVEN: a Todo list with item '${todoText}'`, () => {
     await trashButton.click();
   });
 
-  test("Then that is is removed for the list", async () => {
+  test("THEN: that item is removed from the list", async () => {
     const oldTodos = Array.from(todos);
     oldTodos.shift();
     const newTodos = Array.from(page.getByTestId("todo-title"));
